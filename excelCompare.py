@@ -10,7 +10,7 @@ def compare_excel_files(firstFile, secondFile, outputFileName):
     output_folder = 'ExcelOutput'
     if not (os.path.isdir(inputFolder) and os.path.isdir(output_folder)):
         print("Creating 'ExcelFiles' & 'ExcelOutput' folders.")
-        print("Please run this file again to compare the files wihin the 'ExcelFiles' folder")
+        print("Please run this file again to compare the files wihin the 'ExcelFiles' folder.")
         os.makedirs(inputFolder, exist_ok=True)
         os.makedirs(output_folder, exist_ok=True)
         print("\nExiting program...")
