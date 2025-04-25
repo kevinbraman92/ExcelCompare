@@ -9,12 +9,16 @@ from openpyxl.styles import PatternFill
 def compare_excel_files(firstFile, secondFile, outputFileName):
     inputFolder = 'ExcelFiles'
     output_folder = 'ExcelOutput'
-    os.makedirs(inputFolder, exist_ok=True)
-    os.makedirs(output_folder, exist_ok=True)
-    print("Creating 'ExcelFiles' & 'ExcelOutput' folders if they don't already exist.")
+    if not (os.path.isdir(inputFolder) and os.path.isdir(output_folder)):
+        print("Creating 'ExcelFiles' & 'ExcelOutput' folders.")
+        print("Please run this file again to compare the files wihin the 'ExcelFiles' folder")
+        os.makedirs(inputFolder, exist_ok=True)
+        os.makedirs(output_folder, exist_ok=True)
+        print("\nExiting program...")
+        sys.exit()
     if not os.listdir(inputFolder):
         print("ExcelFiles folder is empty! Please put your two Excel files in there before running this program!")
-        print("Exiting program...")
+        print("\nExiting program...")
         sys.exit()
     
     print("The following prompts will ask you to enter a file name. You do not need to include the extension.")
@@ -35,7 +39,7 @@ def compare_excel_files(firstFile, secondFile, outputFileName):
             print(f"Error! The file '{secondFile}' could not be found in the '{inputFolder}' folder.")
             print("Please try again.")
 
-    print(f"Comparing {firstFile} and {secondFile}...")
+    print(f"\nComparing {firstFile} and {secondFile}...")
 
     reshapedRows = max(dataFrameFirstFile.shape[0], dataFrameSecondFile.shape[0])
     reshapedColumns = max(dataFrameFirstFile.shape[1], dataFrameSecondFile.shape[1])
@@ -69,6 +73,7 @@ def compare_excel_files(firstFile, secondFile, outputFileName):
 
     workbook.save(outputFilePath)
     print(f"Comparison complete! Differences highlighted and saved in: '{outputFilePath}'")
+    print("\nExiting program...")
 
 
 if __name__ == "__main__":
