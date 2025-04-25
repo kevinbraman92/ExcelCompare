@@ -1,5 +1,5 @@
 # ExcelCompare
-A python program that compares two Excel Workbooks and generates a combined file showing the differences between the two.
+A Python program that compares two Excel Workbooks and generates a combined file showing the differences between the two.
 
 Before using, run 'runExcelCompare.bat' once to create the folders for the program. Your file structure should look something like this:
 
