@@ -37,7 +37,7 @@ def format_date_columns(worksheet, date_columns):
                             value.number_format = date_format
 
 # Function to auto adjust the widths of all columns in a worksheet.
-def auto_adjust_columns(worksheet):
+def auto_adjust_columns(worksheet, max_width=20):
     for columns in worksheet.columns:
         max_length = 0
         column_letter = columns[0].column_letter
@@ -47,4 +47,4 @@ def auto_adjust_columns(worksheet):
                     max_length = max(max_length, len(str(cell.value)))
             except:
                 pass
-        worksheet.column_dimensions[column_letter].width = max_length + 2 
+        worksheet.column_dimensions[column_letter].width = min(max_length + 2, max_width)
