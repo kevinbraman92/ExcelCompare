@@ -1,7 +1,6 @@
 import sys
 import os
 import pandas as pd
-import helperFunctions as utility
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 
@@ -38,7 +37,7 @@ def compare_excel_files(firstFile, secondFile, outputFileName):
         except FileNotFoundError:
             print(f"Error! The file '{secondFile}' could not be found in the '{inputFolder}' folder.")
             print("Please try again.")
-
+    
     print(f"\nComparing {firstFile} and {secondFile}...")
 
     reshapedRows = max(dataFrameFirstFile.shape[0], dataFrameSecondFile.shape[0])
@@ -66,10 +65,6 @@ def compare_excel_files(firstFile, secondFile, outputFileName):
                 columnHeader = worksheetOne.cell(row=1, column=col).value if worksheetOne.cell(row=1, column=col).value else f"Col_{col}"
                 cell_name = f"{chr(64 + col)}{row}" if col <= 26 else f"{chr(64 + (col - 1) // 26)}{chr(64 + col % 26)}{col}"
                 differenceSheet.append([columnHeader, cell_name, worksheetOneValue, worksheetTwoValue])
-    
-    worksheet = workbook.active
-    for worksheet in workbook.worksheets:
-        utility.auto_adjust_columns(worksheet)
 
     workbook.save(outputFilePath)
     print(f"Comparison complete! Differences highlighted and saved in: '{outputFilePath}'")
